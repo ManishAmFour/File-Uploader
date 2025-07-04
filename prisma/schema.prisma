@@ -17,9 +17,9 @@ datasource db {
 
 model user {
   id Int @id @default(autoincrement())
-  email String
+  email String @unique
   pword String
-  fileUrl String
+  fileUrl String?
 }
 
 model Session {

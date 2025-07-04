@@ -1,9 +1,5 @@
 const homeG = async (req, res) => {
-  if (!req.user) {
-    res.render("dashboard");
-  } else {
-    res.render("dashboard", { user: req.user });
-  }
+  res.render("dashboard", { user: req.user || undefined });
 };
 
 module.exports = homeG;

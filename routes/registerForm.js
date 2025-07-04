@@ -14,8 +14,7 @@ registerForm.post(
   body("pword")
     .isLength({ min: 5, max: 25 })
     .withMessage("password should be in a given word limit"),
-  (req, res) => {
-    console.log(body());
+  (req, res, next) => {
     const errorArray = validationResult(req);
 
     if (!errorArray.isEmpty()) {
@@ -23,6 +22,7 @@ registerForm.post(
         value: "please write the credentials again",
       });
     }
+    next();
   },
   registerP
 );

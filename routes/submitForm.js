@@ -9,8 +9,4 @@ submitForm.get("/log-in", (req, res) => {
   }
 });
 
-submitForm.post("/log-in", (req, res) => {
-  res.render("login");
-});
-
 module.exports = submitForm;

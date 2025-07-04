@@ -6,7 +6,13 @@
     <title>Dashboard</title>
   </head>
   <body>
+    <%if(!user){%>
     <a href="/register"><p>Register new user</p></a>
-    <a href="/login"><p>Login</p></a>
+    <a href="/log-in"><p>Login</p></a>
+    <%}else{%>
+    <p>Welcome <%=user%></p>
+    <input type="file" />
+    <a href="/log-out"><p>Log out</p></a>
+    <%}%>
   </body>
 </html>

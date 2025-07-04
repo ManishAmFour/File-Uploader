@@ -33,15 +33,22 @@ mainServer.use(
 mainServer.use(passport.initialize());
 mainServer.use(passport.session());
 
-mainServer.use(
+mainServer.post(
+  "/log-in",
   passport.authenticate("local", {
     successRedirect: "/log-in",
     failureRedirect: "/",
-  }),
-  submitForm
+  })
 );
 
+mainServer.use(submitForm);
 mainServer.use(getForm);
 mainServer.use(registerForm);
+
+mainServer.get("/log-out", (req, res) => {
+  req.logOut(() => {
+    res.redirect("/");
+  });
+});
 
 mainServer.listen(3000);
