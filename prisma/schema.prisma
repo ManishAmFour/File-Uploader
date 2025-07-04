@@ -18,4 +18,15 @@ datasource db {
 model user {
   id Int @id @default(autoincrement())
   email String
+  pword String
+  fileUrl String
+}
+
+model Session {
+
+  id String @id 
+  sid String @unique
+  data String 
+  expiresAt DateTime
+
 }

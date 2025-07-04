@@ -1,26 +1,47 @@
 const express = require("express");
 const expressSession = require("express-session");
-
+const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
+const { PrismaClient } = require("./generated/prisma");
 const mainServer = express();
-const formSubmit = require("./routes/formSubmit");
+const getForm = require("./routes/getForm");
+const submitForm = require("./routes/submitForm");
+const registerForm = require("./routes/registerForm");
+const prisma = new PrismaClient();
+const passport = require("passport");
 
-/*
+require("./passport/config");
+
+mainServer.set("view engine", "ejs");
+mainServer.use(express.urlencoded({ extended: true }));
+
 mainServer.use(
   expressSession({
     cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
-    secret: "little Secret",
+    secret: "a secret key",
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(new PrismaClient(), {
-      checkPeriod: 2 * 60 * 1000,
+      checkPeriod: 2 * 60 * 1000, //ms
       dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined,
     }),
   })
-);*/
+);
 
-mainServer.use(formSubmit);
+mainServer.use(passport.initialize());
+mainServer.use(passport.session());
+
+mainServer.use(
+  passport.authenticate("local", {
+    successRedirect: "/log-in",
+    failureRedirect: "/",
+  }),
+  submitForm
+);
+
+mainServer.use(getForm);
+mainServer.use(registerForm);
 
 mainServer.listen(3000);

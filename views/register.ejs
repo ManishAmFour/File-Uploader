@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form shown</title>
+  </head>
+  <body>
+    <%if(value){%>
+    <p><%=value%></p>
+    <%}%>
+    <form method="post" action="/register">
+      <label>Write your email name</label>
+      <input name="EmailName" id="EmailName" required />
+      <label>Write your password</label>
+      <input name="pword" id="pword" required />
+      <input type="submit" value="submit" />
+    </form>
+  </body>
+</html>
