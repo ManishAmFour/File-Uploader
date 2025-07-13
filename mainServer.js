@@ -8,6 +8,7 @@ const submitForm = require("./routes/submitForm");
 const registerForm = require("./routes/registerForm");
 const prisma = new PrismaClient();
 const passport = require("passport");
+const folder = require("./routes/folder");
 
 require("./passport/config");
 
@@ -44,6 +45,7 @@ mainServer.post(
 mainServer.use(submitForm);
 mainServer.use(getForm);
 mainServer.use(registerForm);
+mainServer.use(folder);
 
 mainServer.get("/log-out", (req, res) => {
   req.logOut(() => {

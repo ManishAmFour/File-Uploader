@@ -11,7 +11,12 @@
     <a href="/log-in"><p>Login</p></a>
     <%}else{%>
     <p>Welcome <%=user%></p>
-    <input type="file" />
+
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file_uploaded" />
+      <input type="submit" value="submit" />
+    </form>
+    <a href="/folder">Create folders</a>
     <a href="/log-out"><p>Log out</p></a>
     <%}%>
   </body>
